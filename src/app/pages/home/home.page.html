@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Inbox
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        Todo
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-searchbar [debounce]="500" (ionInput)="handleSearch($event)" placeholder="Search"></ion-searchbar>
+
+    <ion-list class="ion-margin-bottom">
+      <ion-chip (click)="handleStatusFilter()">All</ion-chip>
+      <ion-chip *ngFor="let option of options" (click)="handleStatusFilter(option)">{{option}}</ion-chip>
+    </ion-list>
+
+
+    <app-todo-item (refresh)="refresh($event)" *ngFor="let todo of filteredTodoList" [todo]="todo"></app-todo-item>
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add" routerLink="/todo/new"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

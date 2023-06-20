@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form class="ion-padding" [formGroup]="form">
+
+    <ion-select aria-label="Status" label="Status" fill="outline" interface="popover" placeholder="Select Status"
+      formControlName="status" [hidden]="!isEditMode">
+      <ion-select-option *ngFor="let option of options" [value]="option">{{option}}</ion-select-option>
+    </ion-select>
+
+
+    <ion-input fill="outline" label="Name" placeholder="Name" errorText="This field is required"
+      formControlName="name">
+    </ion-input>
+
+    <ion-textarea fill="outline" label="Description" [autoGrow]="true" rows="8" placeholder="Todo Details"
+      [counter]="true" 
+      maxlength="255" 
+      [counterFormatter]="counterFormatter" 
+      [helperText]="lastModified ? ('Modified: '+ lastModified) : '' "
+      formControlName="description"></ion-textarea>
+  </form>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" type="submit" class="ion-margin"
+      (click)="handleSubmit()">{{isEditMode?'Update':'Save'}}</ion-button>
+  </ion-toolbar>
+</ion-footer>

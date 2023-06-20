@@ -1,0 +1,30 @@
+<ion-item-sliding *ngIf="todoItem">
+  <ion-item-options side="start" (click)="toggleStatus(todoItem)">
+    <ion-item-option [color]="options?.color">Mark {{options?.label}}</ion-item-option>
+  </ion-item-options>
+
+  <ion-item [detail]="false" [lines]="false" [routerLink]="'/todo/' + todoItem.id">
+
+    <ion-label class="ion-text-nowrap">
+      <h2> {{ todoItem.name }} </h2>
+      <small>
+        <ion-note>
+          {{todoItem.status}}
+        </ion-note>
+      </small>
+      <p>
+        <small>
+          {{ todoItem.updatedAt|date:'medium' }}
+        </small>
+      </p>
+      <p>{{todoItem.description}} </p>
+    </ion-label>
+
+  </ion-item>
+  
+  <ion-item-options side="end" (click)="deleteTodo(todoItem.id!)">
+    <ion-item-option color="danger">Delete</ion-item-option>
+  </ion-item-options>
+
+
+</ion-item-sliding>
