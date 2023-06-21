@@ -1,6 +1,17 @@
 <ion-item-sliding *ngIf="todoItem">
   <ion-item-options side="start" (click)="toggleStatus(todoItem)">
-    <ion-item-option [color]="options?.color">Mark {{options?.label}}</ion-item-option>
+    <ion-item-option [color]="options?.color">
+      <ion-grid>
+        <ion-col>
+          <ion-icon [name]="options?.icon"></ion-icon>
+        </ion-col>
+        <ion-col>
+          Mark {{options?.label}}
+        </ion-col>
+      </ion-grid>
+    
+      
+    </ion-item-option>
   </ion-item-options>
 
   <ion-item [detail]="false" [lines]="false" [routerLink]="'/todo/' + todoItem.id">
@@ -21,9 +32,18 @@
     </ion-label>
 
   </ion-item>
-  
+
   <ion-item-options side="end" (click)="deleteTodo(todoItem.id!)">
-    <ion-item-option color="danger">Delete</ion-item-option>
+    <ion-item-option color="danger">
+      <ion-grid>
+        <ion-col>
+          <ion-icon name="trash"></ion-icon>
+        </ion-col>
+        <ion-col>
+          Delete
+        </ion-col>
+      </ion-grid>
+    </ion-item-option>
   </ion-item-options>
 
 

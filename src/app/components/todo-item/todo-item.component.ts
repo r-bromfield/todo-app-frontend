@@ -12,7 +12,7 @@ import { showToast } from 'src/app/utils/helpers';
 })
 export class TodoItemComponent {
   todoItem?: Todo
-  options?: { color: 'warning' | 'success', label: string }
+  options?: { color: 'warning' | 'success', label: string, icon:string }
   @Output() refresh:EventEmitter<Event> = new EventEmitter();
 
 
@@ -21,7 +21,9 @@ export class TodoItemComponent {
 
   @Input() set todo(todo: Todo) {
     this.todoItem = todo;
-    this.options = this.isComplete(todo.status) ? { color: 'warning', label: Status.INCOMPLETE } : { color: 'success', label: Status.COMPLETE }
+    this.options = this.isComplete(todo.status) ? 
+    { color: 'warning', label: Status.INCOMPLETE, icon: 'close-circle-outline' }:
+    { color: 'success', label: Status.COMPLETE, icon:'checkmark-circle-outline' }
   }
 
   isComplete(status: Status) {
