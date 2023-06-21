@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RefresherCustomEvent, SearchbarCustomEvent, ToastController } from '@ionic/angular';
+import { RefresherCustomEvent, SearchbarCustomEvent, ToastController, ViewWillEnter } from '@ionic/angular';
 
 import { TodoService } from '../../services/todo.service';
 import Todo from 'src/app/models/Todo';
@@ -11,15 +11,14 @@ import { showToast } from 'src/app/utils/helpers';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements ViewWillEnter {
 
   todoList: Todo[] = []
   filteredTodoList: Todo[] = []
   options = Object.values(Status)
 
   constructor(private todoService: TodoService) { }
-
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
     this.getList()
   }
 
@@ -53,10 +52,10 @@ export class HomePage implements OnInit {
    * Filters the list base on the value provided 
    * @param searchTerm 
    */
-  private filter(searchTerm?: string, statusFilter?: boolean) {
-    if (searchTerm && !statusFilter) {
+  private filter(searchTerm?: string, isStatusFilter?: boolean) {
+    if (searchTerm && !isStatusFilter) {
       this.filteredTodoList = this.todoList.filter(todo => `${todo.name} ${todo.description}`.toLowerCase().includes(searchTerm.toLowerCase()));
-    } else if (searchTerm && statusFilter) {
+    } else if (searchTerm && isStatusFilter) {
       this.filteredTodoList = this.todoList.filter(todo => todo.status == searchTerm)
     } else {
       this.filteredTodoList = this.todoList
